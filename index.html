@@ -15,52 +15,44 @@
 }
 
 body {
-    background-color: #a69984;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #111; /* removed brown */
     font-family: 'Montserrat', sans-serif;
 }
 
-/* ================= WEBSITE ================= */
+/* ================= FULL SCREEN WEBSITE ================= */
 .ui-card {
-    width: 1100px;
-    max-width: 100%;
-    height: 650px;
+    width: 100%;
+    height: 100vh;
     display: flex;
-    background: #181818;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-    position: relative;
-    overflow: hidden;
 }
 
+/* LEFT SIDE */
 .panel-left {
-    width: 62%;
-    padding: 3rem;
+    width: 60%;
+    padding: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     color: #fff;
+    background: #181818;
 }
 
+/* RIGHT SIDE IMAGE */
 .panel-right {
-    width: 38%;
+    width: 40%;
     background: url('https://i.pinimg.com/736x/21/2e/39/212e3914949df7413645318357753e19.jpg') center/cover no-repeat;
-    position: relative;
 }
 
-/* Header */
+/* LOGO */
 .logo {
-    font-size: 1rem;
+    font-size: 1.2rem;
     letter-spacing: 3px;
-    margin-bottom: 20px;
 }
 
-/* Hero */
+/* HERO */
 .hero h1 {
-    font-size: 2rem;
-    letter-spacing: 6px;
+    font-size: 2.5rem;
+    letter-spacing: 0.5em;
 }
 
 .subtitle {
@@ -68,24 +60,14 @@ body {
     margin-top: 10px;
 }
 
-/* Register Button */
-.register-btn {
-    padding: 12px;
-    background: #c45b41;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-/* Info Block */
+/* INFO */
 .info-box {
     margin-top: 20px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .info-box h4 {
     margin-bottom: 8px;
-    color: #fff;
 }
 
 .info-box ol {
@@ -93,12 +75,21 @@ body {
     color: #aaa;
 }
 
+/* BUTTON */
+.register-btn {
+    padding: 14px;
+    background: #c45b41;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
 /* ================= OVERLAY ================= */
 #registerOverlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
     display: none;
     justify-content: center;
     align-items: center;
@@ -110,7 +101,7 @@ body {
     padding: 40px;
     border-radius: 15px;
     background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.2);
     color: #fff;
     text-align: center;
@@ -149,6 +140,7 @@ body {
 
 <main class="ui-card">
 
+    <!-- LEFT -->
     <div class="panel-left">
 
         <div>
@@ -159,18 +151,16 @@ body {
                 <div class="subtitle">STARTING TODAY 10PM</div>
             </div>
 
-            <!-- BGMI INFO -->
             <div class="info-box">
                 <h4>BGMI / ERANGEL</h4>
                 <ol>
                     <li>Total Prize 10K</li>
                     <li>5 Matches</li>
-                    <li>100 Players per match</li>
-                    <li>Kill + Position based</li>
+                    <li>100 Players</li>
+                    <li>Kill + Position</li>
                 </ol>
             </div>
 
-            <!-- FREE FIRE INFO -->
             <div class="info-box">
                 <h4>FREE FIRE</h4>
                 <ol>
@@ -179,18 +169,18 @@ body {
                     <li>4v4 Only</li>
                 </ol>
             </div>
-
         </div>
 
         <button class="register-btn" onclick="openForm()">Register Now</button>
 
     </div>
 
+    <!-- RIGHT -->
     <div class="panel-right"></div>
 
 </main>
 
-<!-- REGISTRATION OVERLAY -->
+<!-- OVERLAY -->
 <div id="registerOverlay">
   <form class="register-box" id="registerForm">
     <h2>Register</h2>
