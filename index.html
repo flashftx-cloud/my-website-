@@ -1,330 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MO&DEBOARD Layout - Mobile Ready</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaming Tournament</title>
 
-        body {
-            background-color: #a69984; 
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Montserrat', sans-serif;
-            /* Added padding for mobile breathing room */
-            padding: 1rem; 
-        }
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        /* Main Container for the Website UI */
-        .ui-card {
-            width: 1100px;
-            max-width: 100%;
-            height: 650px;
-            display: flex;
-            background: #181818;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
-            position: relative;
-            overflow: hidden;
-        }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        /* Left Dark Section */
-        .panel-left {
-            width: 62%;
-            padding: 4rem 4rem 3.5rem 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            z-index: 2;
-        }
+body {
+    background-color: #a69984;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+}
 
-        /* Right Image Section */
-        .panel-right {
-            width: 38%;
-            background: url('https://i.pinimg.com/736x/21/2e/39/212e3914949df7413645318357753e19.jpg') center/cover no-repeat;
-            position: relative;
-            z-index: 1;
-        }
+/* ================= WEBSITE ================= */
+.ui-card {
+    width: 1100px;
+    max-width: 100%;
+    height: 650px;
+    display: flex;
+    background: #181818;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+}
 
-        /* --- Header & Navigation --- */
-        header {
-            display: flex;
-            align-items: flex-start;
-        }
+.panel-left {
+    width: 62%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+}
 
-        .logo {
-            color: #fff;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            font-weight: 500;
-            margin-right: 120px;
-        }
+.panel-right {
+    width: 38%;
+    background: url('https://i.pinimg.com/736x/21/2e/39/212e3914949df7413645318357753e19.jpg') center/cover no-repeat;
+    position: relative;
+}
 
-        .nav-links {
-            display: flex;
-            gap: 60px;
-        }
+/* Header */
+.logo {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
 
-        .nav-links ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+/* Hero */
+.hero h1 {
+    font-size: 2rem;
+    letter-spacing: 6px;
+}
 
-        .nav-links li {
-            color: #fff;
-            font-size: 0.55rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
+.subtitle {
+    color: #c45b41;
+    margin-top: 10px;
+}
 
-        /* --- Main Hero Typography --- */
-        .hero {
-            margin-top: -60px;
-            color: #fff;
-        }
+/* Register Button */
+.register-btn {
+    padding: 12px;
+    background: #c45b41;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
 
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 400;
-            letter-spacing: 0.6em;
-            line-height: 1.6;
-            white-space: nowrap;
-        }
+/* Info Block */
+.info-box {
+    margin-top: 20px;
+    font-size: 12px;
+}
 
-        .hero .subtitle {
-            display: block;
-            color: #c45b41;
-            font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            margin-left: 280px; 
-        }
+.info-box h4 {
+    margin-bottom: 8px;
+    color: #fff;
+}
 
-        /* --- Footer Link --- */
-        .discovery {
-            color: #c45b41;
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+.info-box ol {
+    padding-left: 15px;
+    color: #aaa;
+}
 
-        /* --- Overlapping Elements --- */
-        .overlap-container {
-            position: absolute;
-            left: 48%; 
-            top: 28%;
-            width: 190px;
-            z-index: 10;
-        }
+/* ================= OVERLAY ================= */
+#registerOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
-        .overlap-img {
-            width: 100%;
-            height: 260px;
-            background: url('') center/cover;
-        }
+.register-box {
+    width: 350px;
+    padding: 40px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    text-align: center;
+}
 
-        /* --- Text Blocks --- */
-        .text-block {
-            color: #fff;
-            font-size: 0.55rem;
-        }
+.register-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+}
 
-        .block-01 {
-            margin-top: 15px;
-        }
+.register-box button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    color: white;
+    cursor: pointer;
+}
 
-        .block-02 {
-            position: absolute;
-            bottom: 40px;
-            left: 30px;
-            width: 75%;
-        }
-
-        .text-block .number {
-            display: block;
-            font-weight: 700;
-            font-size: 0.6rem;
-            margin-bottom: 5px;
-        }
-
-        .text-block h4 {
-            margin: 0 0 8px 0;
-            font-weight: 700;
-            font-size: 0.6rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .text-block p {
-            color: #a0a0a0;
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        .block-02 p {
-            color: #e8e8e8;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-        }
-
-        /* =========================================
-           MOBILE RESPONSIVE STYLES (PHONE LAYOUT)
-           ========================================= */
-        @media screen and (max-width: 850px) {
-            body {
-                padding: 0;
-                align-items: flex-start;
-            }
-
-            .ui-card {
-                flex-direction: column;
-                height: auto;
-                min-height: 100vh;
-                box-shadow: none;
-            }
-
-            /* Stack panels */
-            .panel-left, 
-            .panel-right {
-                width: 100%;
-            }
-
-            .panel-left {
-                padding: 2rem;
-                gap: 3rem; /* Replaces space-between for fluid height */
-            }
-
-            /* Adjust Header for mobile */
-            header {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .logo {
-                margin-right: 0;
-            }
-
-            .nav-links {
-                gap: 30px;
-            }
-
-            /* Adjust Hero text for smaller screens */
-            .hero {
-                margin-top: 0;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-                letter-spacing: 0.4em;
-                white-space: normal; /* Let text wrap if needed */
-            }
-
-            .hero .subtitle {
-                margin-left: 0; /* Reset desktop offset */
-                margin-top: 15px;
-            }
-
-            /* Integrate overlapping container into normal document flow */
-            .overlap-container {
-                position: relative;
-                left: 0;
-                top: 0;
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .overlap-img {
-                height: 200px;
-            }
-
-            /* Ensure Right Panel has height since it relies on background-image */
-            .panel-right {
-                height: 500px;
-                padding: 2rem;
-            }
-
-            /* Adjust bottom text block on mobile */
-            .block-02 {
-                bottom: 2rem;
-                left: 2rem;
-                width: calc(100% - 4rem);
-            }
-        }
-    </style>
+.back-btn {
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid #fff;
+}
+</style>
 </head>
+
 <body>
 
-    <main class="ui-card">
-        
-        <div class="panel-left">
-            <header>
-                <div class="logo">FLASH FTX GAMING TOURNAMENT</div>
-                <nav class="nav-links">
-                    <ul>
-                        <li>BGMI</li>
-                        <li>FREE FIRE</li>
-                        <li>MINECRAFT</li>
-                    </ul>
-                    <ul>
-                        <li>FULL MAP</li>
-                        <li>ROOM MATCHES</li>
-                        <li>PVP BATTLES</li>
-                    </ul>
-                </nav>
-            </header>
+<main class="ui-card">
+
+    <div class="panel-left">
+
+        <div>
+            <div class="logo">FLASH FTX GAMING TOURNAMENT</div>
 
             <div class="hero">
-                <h1>LESTS<br>GO FUN</h1>
-                <span class="subtitle">STARTING TODAY 10PM</span>
+                <h1>LETS GO FUN</h1>
+                <div class="subtitle">STARTING TODAY 10PM</div>
             </div>
 
-            <div class="overlap-container">
-                <div class="overlap-img"> </div>
-                <div class="text-block block-01">
-                    <span class="number">01</span>
-                    <h4>BGMI / ERANGEL MAP</h4>
-                    <ol>
-                        <li>TOTAL PRICE 10k each team</li>
-                        <li>5 Matches</li>
-                        <li>total 100 player in one match</li>
-                        <li>kill and position is important</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="footer-left">
-                <a href="#" class="discovery">TOMAROW 10PM</a>
-            </div>
-        </div>
-
-        <div class="panel-right">
-            <div class="text-block block-02">
-                <span class="number">02</span>
-                <h4>FREE FIRE / ROOM MATCHES</h4>
+            <!-- BGMI INFO -->
+            <div class="info-box">
+                <h4>BGMI / ERANGEL</h4>
                 <ol>
-                    <li>Total price 10k</li>
-                    <li>5 Room Matches</li>
-                    <li>4v4 Only</li>
-                    
+                    <li>Total Prize 10K</li>
+                    <li>5 Matches</li>
+                    <li>100 Players per match</li>
+                    <li>Kill + Position based</li>
                 </ol>
             </div>
+
+            <!-- FREE FIRE INFO -->
+            <div class="info-box">
+                <h4>FREE FIRE</h4>
+                <ol>
+                    <li>Total Prize 10K</li>
+                    <li>5 Room Matches</li>
+                    <li>4v4 Only</li>
+                </ol>
+            </div>
+
         </div>
 
-    </main>
+        <button class="register-btn" onclick="openForm()">Register Now</button>
+
+    </div>
+
+    <div class="panel-right"></div>
+
+</main>
+
+<!-- REGISTRATION OVERLAY -->
+<div id="registerOverlay">
+  <form class="register-box" id="registerForm">
+    <h2>Register</h2>
+    <p>Join Tournament Now</p>
+
+    <input type="text" placeholder="Your Name" required>
+    <input type="text" placeholder="Game ID" required>
+    <input type="tel" placeholder="Contact Number" required>
+
+    <button type="submit">Submit</button>
+    <button type="button" class="back-btn" onclick="closeForm()">Back</button>
+  </form>
+</div>
+
+<script>
+function openForm(){
+    document.getElementById("registerOverlay").style.display = "flex";
+}
+
+function closeForm(){
+    document.getElementById("registerOverlay").style.display = "none";
+}
+
+document.getElementById("registerForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert("Registration Successful ✅");
+    closeForm();
+});
+</script>
 
 </body>
 </html>
