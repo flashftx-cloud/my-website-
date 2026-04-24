@@ -15,31 +15,30 @@
 }
 
 body {
-    background: #111; /* removed brown */
+    background: #111;
     font-family: 'Montserrat', sans-serif;
 }
 
-/* ================= FULL SCREEN WEBSITE ================= */
+/* FULL SCREEN */
 .ui-card {
     width: 100%;
     height: 100vh;
     display: flex;
 }
 
-/* LEFT SIDE */
+/* BALANCED LAYOUT */
 .panel-left {
-    width: 60%;
-    padding: 4rem;
+    width: 55%;
+    padding: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: #fff;
     background: #181818;
+    color: #fff;
 }
 
-/* RIGHT SIDE IMAGE */
 .panel-right {
-    width: 40%;
+    width: 45%;
     background: url('https://i.pinimg.com/736x/21/2e/39/212e3914949df7413645318357753e19.jpg') center/cover no-repeat;
 }
 
@@ -84,7 +83,7 @@ body {
     cursor: pointer;
 }
 
-/* ================= OVERLAY ================= */
+/* OVERLAY */
 #registerOverlay {
     position: fixed;
     inset: 0;
@@ -96,6 +95,7 @@ body {
     z-index: 9999;
 }
 
+/* GLASS FORM */
 .register-box {
     width: 350px;
     padding: 40px;
@@ -140,7 +140,7 @@ body {
 
 <main class="ui-card">
 
-    <!-- LEFT -->
+    <!-- LEFT SIDE -->
     <div class="panel-left">
 
         <div>
@@ -151,6 +151,7 @@ body {
                 <div class="subtitle">STARTING TODAY 10PM</div>
             </div>
 
+            <!-- BGMI -->
             <div class="info-box">
                 <h4>BGMI / ERANGEL</h4>
                 <ol>
@@ -161,6 +162,7 @@ body {
                 </ol>
             </div>
 
+            <!-- FREE FIRE -->
             <div class="info-box">
                 <h4>FREE FIRE</h4>
                 <ol>
@@ -175,7 +177,7 @@ body {
 
     </div>
 
-    <!-- RIGHT -->
+    <!-- RIGHT SIDE -->
     <div class="panel-right"></div>
 
 </main>
