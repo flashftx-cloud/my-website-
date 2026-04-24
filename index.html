@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MO&DEBOARD Layout - Mobile Ready</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #a69984; 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            /* Added padding for mobile breathing room */
+            padding: 1rem; 
+        }
+
+        /* Main Container for the Website UI */
+        .ui-card {
+            width: 1100px;
+            max-width: 100%;
+            height: 650px;
+            display: flex;
+            background: #181818;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Left Dark Section */
+        .panel-left {
+            width: 62%;
+            padding: 4rem 4rem 3.5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Right Image Section */
+        .panel-right {
+            width: 38%;
+            background: url('https://images.unsplash.com/photo-1515347619362-79fc7345b590?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            font-weight: 500;
+            margin-right: 120px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 60px;
+        }
+
+        .nav-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-links li {
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        /* --- Main Hero Typography --- */
+        .hero {
+            margin-top: -60px;
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 0.6em;
+            line-height: 1.6;
+            white-space: nowrap;
+        }
+
+        .hero .subtitle {
+            display: block;
+            color: #c45b41;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            margin-left: 280px; 
+        }
+
+        /* --- Footer Link --- */
+        .discovery {
+            color: #c45b41;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- Overlapping Elements --- */
+        .overlap-container {
+            position: absolute;
+            left: 48%; 
+            top: 28%;
+            width: 190px;
+            z-index: 10;
+        }
+
+        .overlap-img {
+            width: 100%;
+            height: 260px;
+            background: url('https://images.unsplash.com/photo-1542282088-fe8426682b8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80') center/cover;
+        }
+
+        /* --- Text Blocks --- */
+        .text-block {
+            color: #fff;
+            font-size: 0.55rem;
+        }
+
+        .block-01 {
+            margin-top: 15px;
+        }
+
+        .block-02 {
+            position: absolute;
+            bottom: 40px;
+            left: 30px;
+            width: 75%;
+        }
+
+        .text-block .number {
+            display: block;
+            font-weight: 700;
+            font-size: 0.6rem;
+            margin-bottom: 5px;
+        }
+
+        .text-block h4 {
+            margin: 0 0 8px 0;
+            font-weight: 700;
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .text-block p {
+            color: #a0a0a0;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .block-02 p {
+            color: #e8e8e8;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+
+        /* =========================================
+           MOBILE RESPONSIVE STYLES (PHONE LAYOUT)
+           ========================================= */
+        @media screen and (max-width: 850px) {
+            body {
+                padding: 0;
+                align-items: flex-start;
+            }
+
+            .ui-card {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+                box-shadow: none;
+            }
+
+            /* Stack panels */
+            .panel-left, 
+            .panel-right {
+                width: 100%;
+            }
+
+            .panel-left {
+                padding: 2rem;
+                gap: 3rem; /* Replaces space-between for fluid height */
+            }
+
+            /* Adjust Header for mobile */
+            header {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .logo {
+                margin-right: 0;
+            }
+
+            .nav-links {
+                gap: 30px;
+            }
+
+            /* Adjust Hero text for smaller screens */
+            .hero {
+                margin-top: 0;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+                letter-spacing: 0.4em;
+                white-space: normal; /* Let text wrap if needed */
+            }
+
+            .hero .subtitle {
+                margin-left: 0; /* Reset desktop offset */
+                margin-top: 15px;
+            }
+
+            /* Integrate overlapping container into normal document flow */
+            .overlap-container {
+                position: relative;
+                left: 0;
+                top: 0;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .overlap-img {
+                height: 200px;
+            }
+
+            /* Ensure Right Panel has height since it relies on background-image */
+            .panel-right {
+                height: 500px;
+                padding: 2rem;
+            }
+
+            /* Adjust bottom text block on mobile */
+            .block-02 {
+                bottom: 2rem;
+                left: 2rem;
+                width: calc(100% - 4rem);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="ui-card">
+        
+        <div class="panel-left">
+            <header>
+                <div class="logo">MO&DEBOARD</div>
+                <nav class="nav-links">
+                    <ul>
+                        <li>Life and Style</li>
+                        <li>Learn More</li>
+                        <li>Blog</li>
+                    </ul>
+                    <ul>
+                        <li>Contact</li>
+                        <li>Follow</li>
+                        <li>About</li>
+                    </ul>
+                </nav>
+            </header>
+
+            <div class="hero">
+                <h1>YOUR<br>LIFESTYLE</h1>
+                <span class="subtitle">YOUR ROADMAP</span>
+            </div>
+
+            <div class="overlap-container">
+                <div class="overlap-img"></div>
+                <div class="text-block block-01">
+                    <span class="number">01</span>
+                    <h4>BURGUNDY / YOUR MEMORY</h4>
+                    <p>The red leather car seat is a must for any stylish driver. The dark hue complements most vehicles and will keep you safe during your commute to work or school.</p>
+                </div>
+            </div>
+
+            <div class="footer-left">
+                <a href="#" class="discovery">DISCOVERY</a>
+            </div>
+        </div>
+
+        <div class="panel-right">
+            <div class="text-block block-02">
+                <span class="number">02</span>
+                <h4>SHE IS FREEDOM / SUNNY DAY</h4>
+                <p>The red leather car seat is a must for any stylish driver. The dark hue complements most vehicles and will keep you safe during your commute to work or school.</p>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
