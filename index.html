@@ -168,5 +168,54 @@ body {
     <button type="button" class="back-btn" onclick="closeForm()">Back</button>
   </form>
 </div>
+<script>
+function openForm() {
+    document.getElementById('registerOverlay').style.display = 'flex';
+}
+
+function closeForm() {
+    document.getElementById('registerOverlay').style.display = 'none';
+}
+
+// ബാക്കെൻഡിലേക്ക് ഡാറ്റ അയക്കാനുള്ള മെയിൻ കോഡ്
+const registerForm = document.getElementById('registerForm');
+
+registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // പേജ് റീഫ്രഷ് ആകുന്നത് തടയാൻ
+
+    const userData = {
+        name: document.getElementById('name').value,
+        gameId: document.getElementById('gameId').value,
+        contact: document.getElementById('contact').value
+    };
+
+    // 🔴 ശ്രദ്ധിക്കുക: നിങ്ങളുടെ Replit ലിങ്ക് ഇവിടെ നൽകുക
+    const REPLIT_URL ='https://9ef829f6-d107-4f2c-93eb-8f218072a994-00-t1vchqyi898u.pike.replit.dev:3000'; 
+
+    try {
+        const response = await fetch(`${REPLIT_URL}/submit`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('വിജയകരമായി രജിസ്റ്റർ ചെയ്തു! ✅');
+            registerForm.reset(); // ഫോം ക്ലീൻ ആക്കാൻ
+            closeForm(); // ഫോം വിൻഡോ അടയ്ക്കാൻ
+        } else {
+            alert('എന്തോ തകരാർ സംഭവിച്ചു! ❌');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('സെർവറുമായി ബന്ധപ്പെടാൻ കഴിഞ്ഞില്ല!');
+    }
+});
+</script>
+
 </body>
 </html>
