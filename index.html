@@ -168,37 +168,5 @@ body {
     <button type="button" class="back-btn" onclick="closeForm()">Back</button>
   </form>
 </div>
-
-<script>
-function openForm(){
-    document.getElementById("registerOverlay").style.display = "flex";
-}
-
-function closeForm(){
-    document.getElementById("registerOverlay").style.display = "none";
-}
-
-document.getElementById("registerForm").addEventListener("submit", function(e){
-    e.preventDefault();
-
-    const name = document.getElementById("name").value;
-    const gameId = document.getElementById("gameId").value;
-    const contact = document.getElementById("contact").value;
-
-    const message = `🔥FLASH FTX TOURNAMENT REGISTRATION🔥
-
-👤Name: ${name}
-🎮Game ID: ${gameId}
-📱Contact: ${contact}`;
-
-    const phone = "918943632181"; // ⚠️ CHANGE THIS
-
-    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-
-    // ✅ iPhone fix
-    window.location.href = url;
-});
-</script>
-
 </body>
 </html>
