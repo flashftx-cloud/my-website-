@@ -1,460 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Premium Animated Web App</title>
-  
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: linear-gradient(135deg, #f6f8fb 0%, #e5eef9 100%); /* Soft background to make glass pop */
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anoop | Video Editor Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Color Grading */
+        :root {
+            --bg-dark: #050b14;
+            --bg-blue-glow: #112d4e;
+            --text-light: #e0e0e0;
+            --text-white: #ffffff;
+            --accent-red: #8b0000;
+            --accent-blue: #3f72af;
+        }
 
-    /* BUBBLE MENU CSS - UPDATED FOR GLASSMORPHISM */
-    .bubble-menu {
-      left: 0;
-      right: 0;
-      top: 2em;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 0 2em;
-      pointer-events: none;
-      z-index: 99;
-    }
-    .bubble-menu.fixed { position: fixed; }
-    .bubble-menu.absolute { position: absolute; }
-    .bubble-menu .bubble {
-      --bubble-size: 48px;
-      width: var(--bubble-size);
-      height: var(--bubble-size);
-      border-radius: 50%;
-      /* Glassmorphism core CSS */
-      background: rgba(255, 255, 255, 0.6) !important; 
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      /* --------------------- */
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: auto;
-      transition: box-shadow 0.3s ease;
-    }
-    .bubble-menu .bubble:hover {
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-    }
-    .bubble-menu .logo-bubble, .bubble-menu .toggle-bubble { will-change: transform; }
-    .bubble-menu .logo-bubble {
-      width: auto;
-      min-height: var(--bubble-size);
-      height: var(--bubble-size);
-      padding: 0 20px;
-      border-radius: calc(var(--bubble-size) / 2);
-      gap: 8px;
-    }
-    .bubble-menu .toggle-bubble { width: var(--bubble-size); height: var(--bubble-size); }
-    .bubble-menu .bubble-logo { max-height: 60%; max-width: 100%; object-fit: contain; display: block; }
-    .bubble-menu .logo-content {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-    }
-    .bubble-menu .menu-btn {
-      border: none;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-    }
-    .bubble-menu .menu-line {
-      width: 26px;
-      height: 2px;
-      background: #111;
-      border-radius: 2px;
-      display: block;
-      margin: 0 auto;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      transform-origin: center;
-    }
-    .bubble-menu .menu-line + .menu-line { margin-top: 6px; }
-    .bubble-menu .menu-btn.open .menu-line:first-child { transform: translateY(4px) rotate(45deg); }
-    .bubble-menu .menu-btn.open .menu-line:last-child { transform: translateY(-4px) rotate(-45deg); }
-    
-    @media (min-width: 768px) {
-      .bubble-menu .bubble { --bubble-size: 56px; }
-      .bubble-menu .logo-bubble { padding: 0 24px; }
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* FULLSCREEN MENU ITEMS */
-    .bubble-menu-items {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 98;
-    }
-    .bubble-menu-items.fixed { position: fixed; }
-    .bubble-menu-items.absolute { position: absolute; }
-    .bubble-menu-items .pill-list {
-      list-style: none;
-      margin: 0;
-      padding: 0 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      row-gap: 4px;
-      width: 100%;
-      max-width: 1600px;
-      margin-left: auto;
-      margin-right: auto;
-      pointer-events: auto;
-      justify-content: stretch;
-    }
-    .bubble-menu-items .pill-list .pill-col {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      flex: 0 0 calc(100% / 3);
-      box-sizing: border-box;
-    }
-    .bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) { margin-left: calc(100% / 6); }
-    .bubble-menu-items .pill-list .pill-col:nth-child(4):last-child { margin-left: calc(100% / 3); }
-    
-    .bubble-menu-items .pill-link {
-      --pill-bg: rgba(255, 255, 255, 0.8);
-      --pill-color: #111;
-      --item-rot: 0deg;
-      --pill-min-h: 160px;
-      --hover-bg: #f3f4f6;
-      --hover-color: #111;
-      width: 100%;
-      min-height: var(--pill-min-h);
-      padding: clamp(1.5rem, 3vw, 8rem) 0;
-      font-size: clamp(1.5rem, 4vw, 4rem);
-      font-weight: 500;
-      border-radius: 999px;
-      background: var(--pill-bg);
-      color: var(--pill-color);
-      text-decoration: none;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      transition: background 0.3s ease, color 0.3s ease;
-      will-change: transform;
-      box-sizing: border-box;
-      white-space: nowrap;
-    }
-    @media (min-width: 900px) {
-      .bubble-menu-items .pill-link { transform: rotate(var(--item-rot)); }
-      .bubble-menu-items .pill-link:hover {
-        transform: rotate(var(--item-rot)) scale(1.06);
-        background: var(--hover-bg) !important;
-        color: var(--hover-color);
-        border: none;
-      }
-    }
-    .bubble-menu-items .pill-link .pill-label { display: inline-block; will-change: transform, opacity; line-height: 1.2; }
-    
-    @media (max-width: 899px) {
-      .bubble-menu-items { padding-top: 120px; align-items: flex-start; }
-      .bubble-menu-items .pill-list { row-gap: 16px; }
-      .bubble-menu-items .pill-list .pill-col { flex: 0 0 100%; margin-left: 0 !important; }
-      .bubble-menu-items .pill-link { font-size: clamp(1.2rem, 3vw, 4rem); padding: clamp(1rem, 2vw, 2rem) 0; min-height: 80px; }
-      .bubble-menu-items .pill-link:hover { transform: scale(1.04); background: var(--hover-bg) !important; color: var(--hover-color); }
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            /* Background gradient matching the image */
+            background: radial-gradient(circle at 50% 30%, var(--bg-blue-glow) 0%, var(--bg-dark) 70%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
 
-    /* --- NEW ADDITIONS FOR PREMIUM FEEL --- */
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-    /* 1. Gradient Text */
-    .gradient-text {
-      background: linear-gradient(90deg, #4f46e5, #ec4899, #f59e0b);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientFlow 5s ease infinite;
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            background: rgba(5, 11, 20, 0.9);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
 
-    /* 2. Floating Animation */
-    .floating-element {
-      font-size: 4rem;
-      margin: 20px auto;
-      animation: floatItem 4s ease-in-out infinite;
-      display: inline-block;
-    }
-    @keyframes floatItem {
-      0% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-15px) rotate(5deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
-    }
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
 
-    /* 3. Content Cards */
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
-      margin: 60px auto;
-      padding: 0 20px;
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      border-radius: 20px;
-      padding: 30px;
-      text-align: left;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-      cursor: pointer;
-    }
-    .card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      background: #ffffff;
-    }
-    .card-icon {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-    }
-    .card h3 {
-      margin: 0 0 10px 0;
-      color: #1f2937;
-      font-size: 1.5rem;
-    }
-    .card p {
-      margin: 0;
-      color: #6b7280;
-      line-height: 1.6;
-    }
+        nav a:hover, nav a.active {
+            background-color: var(--accent-blue);
+            color: var(--text-white);
+        }
 
-    .hero-section {
-      padding: 150px 20px 50px;
-      text-align: center;
-    }
-    .hero-subtitle {
-      color: #4b5563;
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+        /* Sections General */
+        section {
+            min-height: 100vh;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-  </style>
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        .hero-title span {
+            font-size: 1rem;
+            color: gray;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 30px auto;
+        }
+
+        /* Red Shape from the image */
+        .red-shape {
+            position: absolute;
+            left: -20px;
+            top: 10px;
+            width: 150px;
+            height: 230px;
+            background-color: var(--accent-red);
+            border-radius: 20px 0 0 20px;
+            z-index: -1;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-menu {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .hero-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .hero-menu a:hover {
+            color: var(--text-white);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-white);
+        }
+
+        .about-text p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #b0b0b0;
+        }
+
+        .skills-container {
+            margin-bottom: 20px;
+        }
+        
+        .skills-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .skill {
+            background: #1a1a2e;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--text-white);
+            border: 1px solid #2a2a4a;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-box h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: var(--text-white);
+            margin-bottom: 5px;
+        }
+
+        .info-box p {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+        }
+
+        /* Projects Section */
+        .projects-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .project-item {
+            background: #111;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .project-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-content h2 {
+            font-size: 3rem;
+            margin: 20px 0;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Animations */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
 </head>
 <body>
 
-  <div id="root"></div>
+    <!-- Navigation -->
+    <nav>
+        <a href="#home">PROFILE</a>
+        <a href="#about">ABOUT ME</a>
+        <a href="#projects">PROJECTS</a>
+        <a href="#contact">CONTACT</a>
+    </nav>
 
-  <script type="text/babel">
-    const { useState, useRef, useEffect } = React;
+    <!-- Hero Section -->
+    <section id="home" class="hero hidden">
+        <div class="profile-wrapper">
+            <div class="red-shape"></div>
+            <!-- Maatan ulla image link (Profile Photo) -->
+            <img src="https://via.placeholder.com/250x250/111/fff?text=Your+Photo" alt="Anoop" class="profile-img">
+        </div>
+        <h1 class="hero-title">PORTFOLIO <span>2025</span></h1>
+        <p>⬛ VIDEO EDITOR</p>
+        
+        <div class="hero-menu">
+            <a href="#about">START</a>
+            <a href="#projects">OPTIONS</a>
+            <a href="#contact">EXIT</a>
+        </div>
+    </section>
 
-    const DEFAULT_ITEMS = [
-      { label: 'home', href: '#', ariaLabel: 'Home', rotation: -8, hoverStyles: { bgColor: '#3b82f6', textColor: '#ffffff' } },
-      { label: 'about', href: '#', ariaLabel: 'About', rotation: 8, hoverStyles: { bgColor: '#10b981', textColor: '#ffffff' } },
-      { label: 'projects', href: '#', ariaLabel: 'Documentation', rotation: 8, hoverStyles: { bgColor: '#f59e0b', textColor: '#ffffff' } },
-      { label: 'blog', href: '#', ariaLabel: 'Blog', rotation: 8, hoverStyles: { bgColor: '#ef4444', textColor: '#ffffff' } },
-      { label: 'contact', href: '#', ariaLabel: 'Contact', rotation: -8, hoverStyles: { bgColor: '#8b5cf6', textColor: '#ffffff' } }
-    ];
-
-    function BubbleMenu({
-      logo, onMenuClick, className, style,
-      menuAriaLabel = 'Toggle menu', menuContentColor = '#111',
-      useFixedPosition = false, items, animationEase = 'back.out(1.5)',
-      animationDuration = 0.5, staggerDelay = 0.12
-    }) {
-      const [isMenuOpen, setIsMenuOpen] = useState(false);
-      const [showOverlay, setShowOverlay] = useState(false);
-
-      const overlayRef = useRef(null);
-      const bubblesRef = useRef([]);
-      const labelRefs = useRef([]);
-
-      const menuItems = items?.length ? items : DEFAULT_ITEMS;
-      const containerClassName = ['bubble-menu', useFixedPosition ? 'fixed' : 'absolute', className].filter(Boolean).join(' ');
-
-      const handleToggle = () => {
-        const nextState = !isMenuOpen;
-        if (nextState) setShowOverlay(true);
-        setIsMenuOpen(nextState);
-        onMenuClick?.(nextState);
-      };
-
-      useEffect(() => {
-        const overlay = overlayRef.current;
-        const bubbles = bubblesRef.current.filter(Boolean);
-        const labels = labelRefs.current.filter(Boolean);
-
-        if (!overlay || !bubbles.length) return;
-
-        if (isMenuOpen) {
-          gsap.set(overlay, { display: 'flex' });
-          gsap.killTweensOf([...bubbles, ...labels]);
-          gsap.set(bubbles, { scale: 0, transformOrigin: '50% 50%' });
-          gsap.set(labels, { y: 24, autoAlpha: 0 });
-
-          bubbles.forEach((bubble, i) => {
-            const delay = i * staggerDelay + gsap.utils.random(-0.05, 0.05);
-            const tl = gsap.timeline({ delay });
-
-            tl.to(bubble, { scale: 1, duration: animationDuration, ease: animationEase });
-            if (labels[i]) {
-              tl.to(labels[i], { y: 0, autoAlpha: 1, duration: animationDuration, ease: 'power3.out' }, `-=${animationDuration * 0.9}`);
-            }
-          });
-        } else if (showOverlay) {
-          gsap.killTweensOf([...bubbles, ...labels]);
-          gsap.to(labels, { y: 24, autoAlpha: 0, duration: 0.2, ease: 'power3.in' });
-          gsap.to(bubbles, {
-            scale: 0, duration: 0.2, ease: 'power3.in',
-            onComplete: () => {
-              gsap.set(overlay, { display: 'none' });
-              setShowOverlay(false);
-            }
-          });
-        }
-      }, [isMenuOpen, showOverlay, animationEase, animationDuration, staggerDelay]);
-
-      useEffect(() => {
-        const handleResize = () => {
-          if (isMenuOpen) {
-            const bubbles = bubblesRef.current.filter(Boolean);
-            const isDesktop = window.innerWidth >= 900;
-            bubbles.forEach((bubble, i) => {
-              const item = menuItems[i];
-              if (bubble && item) {
-                const rotation = isDesktop ? (item.rotation ?? 0) : 0;
-                gsap.set(bubble, { rotation });
-              }
-            });
-          }
-        };
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-      }, [isMenuOpen, menuItems]);
-
-      return (
-        <React.Fragment>
-          <nav className={containerClassName} style={style} aria-label="Main navigation">
-            <div className="bubble logo-bubble" aria-label="Logo">
-              <span className="logo-content">
-                {typeof logo === 'string' ? <img src={logo} alt="Logo" className="bubble-logo" /> : logo}
-              </span>
-            </div>
-
-            <button
-              type="button"
-              className={`bubble toggle-bubble menu-btn ${isMenuOpen ? 'open' : ''}`}
-              onClick={handleToggle}
-              aria-label={menuAriaLabel}
-              aria-pressed={isMenuOpen}
-            >
-              <span className="menu-line" style={{ background: menuContentColor }} />
-              <span className="menu-line short" style={{ background: menuContentColor }} />
-            </button>
-          </nav>
-          
-          {showOverlay && (
-            <div ref={overlayRef} className={`bubble-menu-items ${useFixedPosition ? 'fixed' : 'absolute'}`} aria-hidden={!isMenuOpen}>
-              <ul className="pill-list" role="menu" aria-label="Menu links">
-                {menuItems.map((item, idx) => (
-                  <li key={idx} role="none" className="pill-col">
-                    <a
-                      role="menuitem" href={item.href} aria-label={item.ariaLabel || item.label} className="pill-link"
-                      style={{
-                        '--item-rot': `${item.rotation ?? 0}deg`,
-                        '--pill-color': menuContentColor,
-                        '--hover-bg': item.hoverStyles?.bgColor || '#f3f4f6', 
-                        '--hover-color': item.hoverStyles?.textColor || menuContentColor
-                      }}
-                      ref={el => { if (el) bubblesRef.current[idx] = el; }}
-                    >
-                      <span className="pill-label" ref={el => { if (el) labelRefs.current[idx] = el; }}>{item.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </React.Fragment>
-      );
-    }
-
-    // Main App Component
-    function App() {
-      return (
-        <div>
-          <BubbleMenu
-            logo={<span style={{ fontWeight: 800, fontSize: '24px', letterSpacing: '-0.5px' }}>flash ftx</span>}
-            useFixedPosition={true}
-          />
-          
-          <div className="hero-section">
-            <div className="floating-element">🚀</div>
-            <h1 className="gradient-text">Welcome to the Future!</h1>
-            <p className="hero-subtitle">Scroll Thazhekk cheythalum menu nilkum. Click the glass menu icon on the top right to see the magic animation.</p>
-          </div>
-
-          <div className="card-container">
-            <div className="card">
-              <div className="card-icon">💻</div>
-              <h3>Frontend Magic</h3>
-              <p>Experience smooth GSAP animations and React components working together beautifully.</p>
+    <!-- About Section -->
+    <section id="about" class="hidden">
+        <div class="about-grid">
+            <div class="about-image" style="text-align: center;">
+                <p style="font-size: 0.8rem; letter-spacing: 2px;">HELLO, I AM</p>
+                <h2 style="font-size: 2rem; margin-bottom: 20px;">ANOOP</h2>
+                <!-- About photo -->
+                <img src="https://via.placeholder.com/200x300/111/fff?text=Anoop" alt="Anoop" style="width: 200px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
             </div>
             
-            <div className="card">
-              <div className="card-icon">✨</div>
-              <h3>Glassmorphism UI</h3>
-              <p>Modern transparent elements with background blur effects to give that premium look.</p>
-            </div>
+            <div class="about-text">
+                <h3>ABOUT ME</h3>
+                <p>Hi, I'm Anoop. I am a passionate Video Editor making dynamic and engaging content. Over the years, I've learned a lot of things from editing, motion graphics, and color grading. I continuously upgrade my editing skills from year to year to provide the best output.</p>
+                
+                <div class="skills-container">
+                    <h4>SOFTWARE SKILLS</h4>
+                    <div class="skills-badges">
+                        <span class="skill">Premiere Pro</span>
+                        <span class="skill">After Effects</span>
+                        <span class="skill">DaVinci Resolve</span>
+                        <span class="skill">CapCut</span>
+                        <span class="skill">Photoshop</span>
+                    </div>
+                </div>
 
-            <div className="card">
-              <div className="card-icon">📱</div>
-              <h3>Fully Responsive</h3>
-              <p>Looks great on desktop monitors as well as mobile screens. Try resizing!</p>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>EDUCATION</h4>
+                        <p>🔹 Plus Two (+2)</p>
+                        <p>Focusing on creative media and continuous self-learning.</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>EXPERIENCE</h4>
+                        <p>🔹 4 Years Experience</p>
+                        <p>Professional Video Editing, Color Grading, and Content Creation.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-          
-          {/* Extra space just to show the scrolling effect clearly */}
-          <div style={{ height: '50vh' }}></div>
-          
         </div>
-      );
-    }
+    </section>
 
-    // Render the App
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
+    <!-- Projects Section -->
+    <section id="projects" class="hidden">
+        <div class="projects-header">
+            <h2>RECAP PROJECT 2025</h2>
+        </div>
+        
+        <div class="project-grid">
+            <!-- Project Images - Replace the src with your work images -->
+            <div class="project-item"><img src="https://via.placeholder.com/300x400/222/555?text=Project+1" alt="Project"></div>
+            <div class="project-item"><img src="https://via.placeholder.com/300x400/333/777?text=Project+2" alt="Project"></div>
+            <div class="project-item"><img src="https://via.placeholder.com/300x400/444/888?text=Project+3" alt="Project"></div>
+            <div class="project-item"><img src="https://via.placeholder.com/300x400/111/555?text=Project+4" alt="Project"></div>
+            <div class="project-item"><img src="https://via.placeholder.com/300x400/222/666?text=Project+5" alt="Project"></div>
+            <div class="project-item"><img src="https://via.placeholder.com/300x400/444/999?text=Project+6" alt="Project"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="hidden">
+        <div class="contact-content">
+            <h3 style="font-size: 1.2rem; color: #b0b0b0;">CONTACT ME</h3>
+            <div style="width: 150px; height: 150px; margin: 20px auto; border-radius: 50%; overflow: hidden; border: 2px solid var(--accent-blue);">
+                 <img src="https://via.placeholder.com/150/111/fff?text=Anoop" alt="Contact" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            
+            <div class="social-links">
+                <a href="#">📷 @anoop_edits</a>
+                <a href="#">📧 anoop@email.com</a>
+                <a href="#">📱 +91 XXXXX XXXXX</a>
+            </div>
+
+            <h2>THANK YOU<br>2025</h2>
+        </div>
+    </section>
+
+    <!-- JavaScript for Animations and Smooth Scrolling -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, {
+            threshold: 0.1 // Triggers when 10% of the section is visible
+        });
+
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+    </script>
 </body>
 </html>
