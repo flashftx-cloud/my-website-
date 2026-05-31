@@ -7,10 +7,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for Color Grading */
+        /* CSS Variables */
         :root {
             --bg-dark: #050b14;
-            --bg-blue-glow: #112d4e;
             --text-light: #e0e0e0;
             --text-white: #ffffff;
             --accent-red: #8b0000;
@@ -25,10 +24,9 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-dark);
+            /* Updated Gradient Background */
+            background: radial-gradient(circle at 30% 20%, #1a365d 0%, #050b14 50%, #000000 100%);
             color: var(--text-light);
-            /* Background gradient matching the image */
-            background: radial-gradient(circle at 50% 30%, var(--bg-blue-glow) 0%, var(--bg-dark) 70%);
             background-attachment: fixed;
             overflow-x: hidden;
         }
@@ -49,7 +47,7 @@
             padding: 20px;
             position: sticky;
             top: 0;
-            background: rgba(5, 11, 20, 0.9);
+            background: rgba(5, 11, 20, 0.8);
             z-index: 100;
             backdrop-filter: blur(10px);
         }
@@ -86,17 +84,22 @@
         }
         
         .hero-title {
-            font-size: 3rem;
+            font-size: 4rem;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            /* Gradient for Text */
+            background: linear-gradient(180deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-title span {
-            font-size: 1rem;
-            color: gray;
+            font-size: 1.2rem;
+            color: #555;
+            -webkit-text-fill-color: #777;
         }
 
         .profile-wrapper {
@@ -177,7 +180,7 @@
         }
 
         .skill {
-            background: #1a1a2e;
+            background: rgba(26, 26, 46, 0.7);
             padding: 8px 15px;
             border-radius: 8px;
             font-size: 0.8rem;
@@ -296,11 +299,11 @@
     <section id="home" class="hero hidden">
         <div class="profile-wrapper">
             <div class="red-shape"></div>
-            <!-- Maatan ulla image link (Profile Photo) -->
-            <img src="[IMG-0900.jpg](https://postimg.cc/9w49GnLs)" alt="Anoop" class="profile-img">
+            <!-- Profile Photo -->
+            <img src="https://via.placeholder.com/250x250/111/fff?text=Your+Photo" alt="Anoop" class="profile-img">
         </div>
         <h1 class="hero-title">PORTFOLIO <span>2025</span></h1>
-        <p>⬛ VIDEO EDITOR</p>
+        <p style="letter-spacing: 1px;">⬛ VIDEO EDITOR</p>
         
         <div class="hero-menu">
             <a href="#about">START</a>
@@ -314,7 +317,7 @@
         <div class="about-grid">
             <div class="about-image" style="text-align: center;">
                 <p style="font-size: 0.8rem; letter-spacing: 2px;">HELLO, I AM</p>
-                <h2 style="font-size: 2rem; margin-bottom: 20px;">ANOOP</h2>
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px;">ANOOP</h2>
                 <!-- About photo -->
                 <img src="https://via.placeholder.com/200x300/111/fff?text=Anoop" alt="Anoop" style="width: 200px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
             </div>
@@ -338,7 +341,7 @@
                     <div class="info-box">
                         <h4>EDUCATION</h4>
                         <p>🔹 Plus Two (+2)</p>
-                        <p>Focusing on creative media and continuous self-learning.</p>
+                        <p>Focusing on creative media and continuous skill development.</p>
                     </div>
                     <div class="info-box">
                         <h4>EXPERIENCE</h4>
@@ -357,7 +360,7 @@
         </div>
         
         <div class="project-grid">
-            <!-- Project Images - Replace the src with your work images -->
+            <!-- Project Images - Replace with your works -->
             <div class="project-item"><img src="https://via.placeholder.com/300x400/222/555?text=Project+1" alt="Project"></div>
             <div class="project-item"><img src="https://via.placeholder.com/300x400/333/777?text=Project+2" alt="Project"></div>
             <div class="project-item"><img src="https://via.placeholder.com/300x400/444/888?text=Project+3" alt="Project"></div>
@@ -381,7 +384,7 @@
                 <a href="#">📱 +91 XXXXX XXXXX</a>
             </div>
 
-            <h2>THANK YOU<br>2025</h2>
+            <h2 style="background: linear-gradient(180deg, #ffffff 0%, #555555 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">THANK YOU<br>2025</h2>
         </div>
     </section>
 
@@ -405,7 +408,7 @@
                 }
             });
         }, {
-            threshold: 0.1 // Triggers when 10% of the section is visible
+            threshold: 0.1
         });
 
         const hiddenElements = document.querySelectorAll('.hidden');
