@@ -1,221 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLASH FTX Gaming</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Website Example</title>
+    <style>
+        /* Basic Reset and Styling */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        .animated-container {
+            animation: fadeIn 2s ease-out forwards;
+        }
 
-body {
-    background: #0f0f0f;
-    font-family: 'Montserrat', sans-serif;
-    color: #fff;
-}
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 40px 20px;
-}
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #e2e8f0;
+        }
 
-.logo {
-    font-size: 14px;
-    letter-spacing: 4px;
-    margin-bottom: 20px;
-    opacity: 0.8;
-}
+        /* Bounce Animation for Button */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
 
-.hero h1 {
-    font-size: 48px;
-    font-weight: 700;
-    letter-spacing: 6px;
-    line-height: 1.2;
-}
+        .cta-button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            color: #764ba2;
+            background-color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+            animation: bounce 2s infinite; /* Applying the bounce */
+        }
 
-.subtitle {
-    color: #c45b41;
-    margin-top: 15px;
-    font-size: 18px;
-}
-
-.section {
-    margin-top: 40px;
-}
-
-.section h3 {
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-.section ol {
-    padding-left: 20px;
-    color: #aaa;
-    line-height: 1.8;
-}
-
-.register-btn {
-    margin-top: 40px;
-    width: 100%;
-    padding: 15px;
-    background: #c45b41;
-    border: none;
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-#registerOverlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(10px);
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.register-box {
-    width: 320px;
-    padding: 30px;
-    border-radius: 15px;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(20px);
-    text-align: center;
-}
-
-.register-box input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 12px;
-    border-radius: 20px;
-    border: none;
-    background: rgba(255,255,255,0.2);
-    color: #fff;
-}
-
-.register-box button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 20px;
-    border: none;
-    background: #ff7e5f;
-    color: #fff;
-}
-
-.back-btn {
-    margin-top: 10px;
-    background: transparent;
-    border: 1px solid #fff;
-}
-</style>
+        .cta-button:hover {
+            background-color: #f0f0f0;
+            animation-play-state: paused; /* Pauses bouncing when hovered */
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
-
-    <div class="logo"><h1>FLASH FTX GAMING TOURNAMENT</h1></div>
-
-    <div class="hero">
-        <h2>LETS GO<br>FOR FUN</h2>
-        <div class="subtitle">STARTING TODAY 10PM</div>
+    <div class="animated-container">
+        <h1>Welcome to the Future</h1>
+        <p>This entire section faded in, and the button below is bouncing!</p>
+        <button class="cta-button">Click Me</button>
     </div>
-
-    <div class="section">
-        <h3>BGMI / ERANGEL</h3>
-        <ol>
-            <li>Total Prize 10K</li>
-            <li>5 Matches</li>
-            <li>100 Players</li>
-            <li>Kill + Position</li>
-        </ol>
-    </div>
-
-    <div class="section">
-        <h3>FREE FIRE</h3>
-        <ol>
-            <li>Total Prize 10K</li>
-            <li>5 Room Matches</li>
-            <li>4v4 Only</li>
-        </ol>
-    </div>
-
-    <button class="register-btn" onclick="openForm()">Register Now</button>
-
-</div>
-
-<!-- OVERLAY -->
-<div id="registerOverlay">
-  <form class="register-box" id="registerForm">
-    <h2>Register</h2>
-    <p>JOIN TOURNAMENT NOW</p>
-    <br>
-
-    <!-- ✅ ID added -->
-    <input type="text" id="name" placeholder="Your Name" required>
-    <input type="text" id="gameId" placeholder="Game ID" required>
-    <input type="tel" id="contact" placeholder="Contact Number" required>
-
-    <button type="submit">Submit</button>
-    <button type="button" class="back-btn" onclick="closeForm()">Back</button>
-  </form>
-</div>
-<script>
-function openForm() {
-    document.getElementById('registerOverlay').style.display = 'flex';
-}
-
-function closeForm() {
-    document.getElementById('registerOverlay').style.display = 'none';
-}
-
-// ബാക്കെൻഡിലേക്ക് ഡാറ്റ അയക്കാനുള്ള മെയിൻ കോഡ്
-const registerForm = document.getElementById('registerForm');
-
-registerForm.addEventListener('submit', async (e) => {
-    e.preventDefault(); // പേജ് റീഫ്രഷ് ആകുന്നത് തടയാൻ
-
-    const userData = {
-        name: document.getElementById('name').value,
-        gameId: document.getElementById('gameId').value,
-        contact: document.getElementById('contact').value
-    };
-
-    // 🔴 ശ്രദ്ധിക്കുക: നിങ്ങളുടെ Replit ലിങ്ക് ഇവിടെ നൽകുക
-    const REPLIT_URL ='https://nodejs--ashasebastiab.replit.app'; 
-
-    try {
-        const response = await fetch(`${REPLIT_URL}/submit`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(userData)
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-            alert('വിജയകരമായി രജിസ്റ്റർ ചെയ്തു! ✅');
-            registerForm.reset(); // ഫോം ക്ലീൻ ആക്കാൻ
-            closeForm(); // ഫോം വിൻഡോ അടയ്ക്കാൻ
-        } else {
-            alert('എന്തോ തകരാർ സംഭവിച്ചു! ❌');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('സെർവറുമായി ബന്ധപ്പെടാൻ കഴിഞ്ഞില്ല!');
-    }
-});
-</script>
 
 </body>
 </html>
