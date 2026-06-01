@@ -14,17 +14,19 @@
             --text-white: #ffffff;
             --accent-red: #8b0000;
             --accent-blue: #3f72af;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            /* Updated Gradient Background */
             background: radial-gradient(circle at 30% 20%, #1a365d 0%, #050b14 50%, #000000 100%);
             color: var(--text-light);
             background-attachment: fixed;
@@ -39,37 +41,50 @@
             letter-spacing: 2px;
         }
 
-        /* Navigation */
+        /* Glassmorphism Navigation */
         nav {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            position: sticky;
-            top: 0;
-            background: rgba(5, 11, 20, 0.8);
-            z-index: 100;
-            backdrop-filter: blur(10px);
+            gap: 15px;
+            padding: 12px 25px;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(17, 45, 78, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            z-index: 1000;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            width: max-content;
+            transition: all 0.3s ease;
         }
 
         nav a {
             color: var(--text-light);
             text-decoration: none;
-            font-size: 14px;
-            padding: 5px 15px;
-            border-radius: 20px;
-            transition: 0.3s;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
+        /* Active Navigation Animation */
         nav a:hover, nav a.active {
             background-color: var(--accent-blue);
             color: var(--text-white);
+            box-shadow: 0 0 15px rgba(63, 114, 175, 0.5);
+            transform: scale(1.05);
         }
 
         /* Sections General */
         section {
             min-height: 100vh;
-            padding: 50px 20px;
+            padding: 100px 20px 50px 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -90,10 +105,10 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            /* Gradient for Text */
             background: linear-gradient(180deg, #ffffff 0%, #888888 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s ease-out;
         }
 
         .hero-title span {
@@ -107,9 +122,10 @@
             width: 250px;
             height: 250px;
             margin: 30px auto;
+            /* Floating Animation */
+            animation: float 4s ease-in-out infinite;
         }
 
-        /* Red Shape from the image */
         .red-shape {
             position: absolute;
             left: -20px;
@@ -119,6 +135,7 @@
             background-color: var(--accent-red);
             border-radius: 20px 0 0 20px;
             z-index: -1;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
         }
 
         .profile-img {
@@ -127,25 +144,32 @@
             object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid var(--glass-border);
         }
 
         .hero-menu {
             margin-top: 30px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
+            align-items: center;
         }
 
         .hero-menu a {
             color: var(--text-light);
             text-decoration: none;
             font-size: 14px;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            padding: 5px 15px;
+            border-radius: 5px;
         }
 
         .hero-menu a:hover {
             color: var(--text-white);
+            background: var(--glass-bg);
+            letter-spacing: 4px;
+            box-shadow: 0 0 10px var(--glass-border);
         }
 
         /* About Section */
@@ -153,6 +177,15 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 30px;
+        }
+
+        .about-image img {
+            border: 1px solid var(--glass-border);
+            transition: transform 0.4s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.05);
         }
 
         .about-text h3 {
@@ -180,13 +213,23 @@
         }
 
         .skill {
-            background: rgba(26, 26, 46, 0.7);
+            background: var(--glass-bg);
             padding: 8px 15px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 0.8rem;
             font-weight: bold;
             color: var(--text-white);
-            border: 1px solid #2a2a4a;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill:hover {
+            transform: translateY(-5px);
+            background: rgba(63, 114, 175, 0.4);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border-color: var(--accent-blue);
         }
 
         .info-grid {
@@ -195,8 +238,21 @@
             gap: 20px;
         }
 
+        .info-box {
+            background: var(--glass-bg);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .info-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
         .info-box h4 {
-            font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             color: var(--text-white);
             margin-bottom: 5px;
@@ -210,45 +266,49 @@
         /* Projects Section */
         .projects-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
+            gap: 20px;
         }
 
         .project-item {
-            background: #111;
-            height: 150px;
-            border-radius: 8px;
+            background: var(--glass-bg);
+            height: 160px;
+            border-radius: 12px;
             overflow: hidden;
             position: relative;
+            padding: 5px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
         }
 
-        .project-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.4s;
+        .project-item:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .project-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* വീഡിയോയ്ക്ക് വേണ്ടിയുള്ള CSS */
         .project-item iframe {
             width: 100%;
             height: 100%;
             border: none;
             border-radius: 8px;
+            pointer-events: auto;
         }
 
         /* Contact Section */
         .contact-content {
             text-align: center;
+            background: var(--glass-bg);
+            padding: 40px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
         }
 
         .contact-content h2 {
@@ -272,35 +332,53 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid transparent;
         }
 
         .social-links a:hover {
-            color: var(--accent-blue);
+            color: var(--text-white);
+            background: var(--accent-blue);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(63, 114, 175, 0.4);
         }
 
-        /* Animations */
+        /* Global Keyframe Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .hidden {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
 
         .show {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <a href="#home">PROFILE</a>
-        <a href="#about">ABOUT ME</a>
-        <a href="#projects">PROJECTS</a>
-        <a href="#contact">CONTACT</a>
+    <!-- Glassmorphism Navigation -->
+    <nav id="navbar">
+        <a href="#home" class="nav-link active">PROFILE</a>
+        <a href="#about" class="nav-link">ABOUT</a>
+        <a href="#projects" class="nav-link">PROJECTS</a>
+        <a href="#contact" class="nav-link">CONTACT</a>
     </nav>
 
     <!-- Hero Section -->
@@ -368,7 +446,7 @@
         </div>
         
         <div class="project-grid">
-            <!-- വീഡിയോകൾ ഇവിടെ ആഡ് ചെയ്യാം. YOUR_VIDEO_ID എന്നതിന് പകരം നിങ്ങളുടെ YouTube ID കൊടുക്കുക -->
+            <!-- Videos inside glass cards -->
             <div class="project-item"><iframe src="https://www.youtube.com/embed/c0dlwUcGZ74" allowfullscreen></iframe></div>
             <div class="project-item"><iframe src="https://www.youtube.com/embed/58SilirQQnU" allowfullscreen></iframe></div>
             <div class="project-item"><iframe src="https://www.youtube.com/embed/1w6LEpgqJuQ" allowfullscreen></iframe></div>
@@ -382,7 +460,7 @@
     <section id="contact" class="hidden">
         <div class="contact-content">
             <h3 style="font-size: 1.2rem; color: #b0b0b0;">CONTACT ME</h3>
-            <div style="width: 150px; height: 150px; margin: 20px auto; border-radius: 50%; overflow: hidden; border: 2px solid var(--accent-blue);">
+            <div style="width: 150px; height: 150px; margin: 20px auto; border-radius: 50%; overflow: hidden; border: 3px solid rgba(255, 255, 255, 0.2); box-shadow: 0 0 20px rgba(0,0,0,0.5);">
                  <img src="https://i.postimg.cc/764yh7Gc/BFD9A9D3-94B6-4356-8D64-EE48A419440C.jpg" alt="Contact" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             
@@ -392,23 +470,13 @@
                 <a href="#">📱 +91 8943632181</a>
             </div>
 
-            <h2 style="background: linear-gradient(180deg, #ffffff 0%, #555555 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">THANK YOU<br>FOR ALL</h2>
+            <h2 style="background: linear-gradient(180deg, #ffffff 0%, #555555 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-top: 40px;">THANK YOU<br>FOR ALL</h2>
         </div>
     </section>
 
     <!-- JavaScript for Animations and Smooth Scrolling -->
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Intersection Observer for Scroll Animations
+        // Intersection Observer for Scroll Reveal Animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -416,11 +484,34 @@
                 }
             });
         }, {
-            threshold: 0.1
+            threshold: 0.15 // Triggers a bit later for smoother feel
         });
 
         const hiddenElements = document.querySelectorAll('.hidden');
         hiddenElements.forEach((el) => observer.observe(el));
+
+        // ScrollSpy Logic for Glass Navigation Menu
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                // Check if scroll position is past the top 1/3rd of the section
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
